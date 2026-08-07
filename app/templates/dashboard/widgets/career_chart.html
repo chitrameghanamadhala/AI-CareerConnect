@@ -1,0 +1,12 @@
+<!--
+templates/dashboard/widgets/career_chart.html — Chart Widget
+==============================================================
+Why this file exists:
+    Embeds a Chart.js canvas for dynamic career data visualization.
+    The dashboard.js file fetches data from /dashboard/stats and renders
+    it here. Kept as a widget so the chart can be included on any page.
+-->
+<div class="chart-container" id="chart-container">
+    <canvas id="career-chart" width="400" height="200"></canvas>
+</div>
+<p class="chart-caption">Conversation activity over your recent sessions.</p>

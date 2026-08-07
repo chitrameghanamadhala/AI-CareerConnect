@@ -1,0 +1,41 @@
+<!--
+templates/auth/login.html — Login Page
+========================================
+Why this file exists:
+    Renders the login form. Extends base.html for consistent layout.
+-->
+{% extends "base.html" %}
+
+{% block title %}Login — AI Career Connect{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <div class="auth-card">
+        <h1>Welcome Back</h1>
+        <p class="auth-subtitle">Sign in to continue your career journey</p>
+
+        <form method="POST" action="{{ url_for('auth.login') }}" id="login-form">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required
+                       placeholder="you@example.com" autocomplete="email">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required
+                       placeholder="••••••••" autocomplete="current-password">
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-full" id="login-button">
+                Sign In
+            </button>
+        </form>
+
+        <p class="auth-footer">
+            Don't have an account?
+            <a href="{{ url_for('auth.register') }}">Register here</a>
+        </p>
+    </div>
+</div>
+{% endblock %}

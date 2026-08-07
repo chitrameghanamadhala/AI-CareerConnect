@@ -1,0 +1,53 @@
+<!--
+templates/career/detail.html — Career Detail Page
+===================================================
+Why this file exists:
+    Shows full details for a single career path — description, salary,
+    growth rate, and required skills. Linked from the recommendations page.
+-->
+{% extends "base.html" %}
+
+{% block title %}{{ career.title }} — AI Career Connect{% endblock %}
+
+{% block content %}
+<div class="career-detail">
+    <a href="{{ url_for('career.recommendations') }}" class="back-link">← Back to Careers</a>
+
+    <h1>{{ career.title }}</h1>
+    <span class="badge">{{ career.industry or 'General' }}</span>
+
+    <div class="detail-section">
+        <h2>About This Career</h2>
+        <p>{{ career.description or 'No description available.' }}</p>
+    </div>
+
+    <div class="detail-grid">
+        {% if career.avg_salary %}
+        <div class="detail-card">
+            <span class="detail-icon">💰</span>
+            <span class="detail-label">Average Salary</span>
+            <span class="detail-value">${{ "{:,.0f}".format(career.avg_salary) }}</span>
+        </div>
+        {% endif %}
+
+        {% if career.growth_rate %}
+        <div class="detail-card">
+            <span class="detail-icon">📈</span>
+            <span class="detail-label">Growth Rate</span>
+            <span class="detail-value">{{ career.growth_rate }}%</span>
+        </div>
+        {% endif %}
+    </div>
+
+    {% if career.skills.all() %}
+    <div class="detail-section">
+        <h2>Required Skills</h2>
+        <div class="skill-tags">
+            {% for skill in career.skills %}
+            <span class="skill-tag">{{ skill.name }}</span>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

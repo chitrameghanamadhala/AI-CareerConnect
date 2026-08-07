@@ -1,0 +1,31 @@
+project Name: AI Career connect
+
+1.chat with AI
+2.career question to AI using voice
+3.resume suggestions
+4.get interview questions
+5.store conversations in db
+6.convert speech to text -->text -->speech
+7.text to speech
+
+features:
+1.user regitration /login
+2.AI chat assistant
+3.speech to text
+4.text to speech
+5.resume analyzer
+6.interview questions generator
+7.career roadmap generator
+8.chat history
+9.SQLite db
+10.dynamic dashboard
+
+TechStack:
+backend -->flask
+frontend -->html,css,js
+AI model -->mistral API
+database -->SQLite
+ORM -->SQLALCHEMY
+Speech to text-->Speech Recognition
+styling-->Bootstrp
+AI coding-->Antigravity - claude opus 

@@ -1,0 +1,36 @@
+<!--
+templates/dashboard/widgets/ai_chat.html — AI Chat Widget
+============================================================
+Why this file exists:
+    The chat interface widget embedded in the dashboard. Provides:
+    - Message display area
+    - Text input with send button
+    - Microphone button for speech-to-text
+    - Speaker button for text-to-speech playback
+
+    Logic is handled by chat.js and speech.js.
+-->
+<div class="chat-widget" id="ai-chat-widget">
+    <!-- Message Display -->
+    <div class="chat-messages" id="chat-messages">
+        <div class="chat-message assistant">
+            <p>👋 Hi! I'm your AI Career Advisor. Tell me about your skills,
+            interests, or ask me about any career path!</p>
+        </div>
+    </div>
+
+    <!-- Input Area -->
+    <div class="chat-input-area">
+        <input type="text" id="chat-input" placeholder="Type your message..."
+               autocomplete="off">
+        <button class="btn btn-icon" id="btn-mic" title="Voice input (Speech-to-Text)">
+            🎤
+        </button>
+        <button class="btn btn-primary" id="btn-send" title="Send message">
+            Send
+        </button>
+    </div>
+
+    <!-- Hidden audio player for TTS -->
+    <audio id="tts-audio" style="display:none;"></audio>
+</div>

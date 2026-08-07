@@ -1,0 +1,68 @@
+<!--
+templates/dashboard/index.html — Main Dashboard
+=================================================
+Why this file exists:
+    The primary page after login. Displays:
+    - Stats cards (total conversations, messages, careers)
+    - Career insights chart (Chart.js)
+    - AI chat widget
+    - Recent conversations list
+
+    Uses include directives to pull in reusable widget fragments.
+-->
+{% extends "base.html" %}
+
+{% block title %}Dashboard — AI Career Connect{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="dashboard" id="dashboard-page">
+    <h1 class="dashboard-title">📊 Your Dashboard</h1>
+
+    <!-- ── Stats Row ──────────────────────────────────── -->
+    <div class="stats-row">
+        {% include "dashboard/widgets/stats_card.html" %}
+    </div>
+
+    <!-- ── Main Grid ──────────────────────────────────── -->
+    <div class="dashboard-grid">
+        <!-- Chart Widget -->
+        <div class="widget widget-chart">
+            <h2>Career Insights</h2>
+            {% include "dashboard/widgets/career_chart.html" %}
+        </div>
+
+        <!-- AI Chat Widget -->
+        <div class="widget widget-chat">
+            <h2>🤖 AI Career Advisor</h2>
+            {% include "dashboard/widgets/ai_chat.html" %}
+        </div>
+    </div>
+
+    <!-- ── Recent Conversations ───────────────────────── -->
+    <div class="widget widget-recent">
+        <h2>Recent Conversations</h2>
+        {% if recent_conversations %}
+            <ul class="conversation-list">
+                {% for conv in recent_conversations %}
+                <li class="conversation-item">
+                    <span class="conv-title">{{ conv.title }}</span>
+                    <span class="conv-date">{{ conv.created_at.strftime('%b %d, %Y') }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="empty-state">No conversations yet. Start chatting with the AI advisor!</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+<script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+<script src="{{ url_for('static', filename='js/speech.js') }}"></script>
+{% endblock %}

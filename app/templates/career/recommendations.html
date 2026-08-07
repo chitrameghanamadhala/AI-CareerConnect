@@ -1,0 +1,53 @@
+<!--
+templates/career/recommendations.html — Career Recommendations
+================================================================
+Why this file exists:
+    Displays AI-generated career recommendations as cards. Also serves
+    as the search results page (reused with a search_query variable).
+-->
+{% extends "base.html" %}
+
+{% block title %}Career Recommendations — AI Career Connect{% endblock %}
+
+{% block content %}
+<div class="career-page">
+    <h1>🎯 Career Recommendations</h1>
+
+    <!-- Search Bar -->
+    <form class="search-bar" action="{{ url_for('career.search') }}" method="GET" id="career-search-form">
+        <input type="text" name="q" placeholder="Search careers..."
+               value="{{ search_query|default('') }}" id="career-search-input">
+        <button type="submit" class="btn btn-primary" id="career-search-btn">Search</button>
+    </form>
+
+    <!-- Career Cards -->
+    {% if careers %}
+        <div class="career-grid">
+            {% for career in careers %}
+            <div class="career-card" id="career-card-{{ career.id }}">
+                <h3>{{ career.title }}</h3>
+                <p class="career-industry">{{ career.industry or 'General' }}</p>
+                <p class="career-desc">{{ career.description[:150] }}...</p>
+
+                <div class="career-meta">
+                    {% if career.avg_salary %}
+                    <span class="meta-item">💰 ${{ "{:,.0f}".format(career.avg_salary) }}</span>
+                    {% endif %}
+                    {% if career.growth_rate %}
+                    <span class="meta-item">📈 {{ career.growth_rate }}% growth</span>
+                    {% endif %}
+                </div>
+
+                <a href="{{ url_for('career.detail', career_id=career.id) }}"
+                   class="btn btn-outline btn-sm">View Details →</a>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="empty-state">
+            <p>No career recommendations yet. Start chatting with the AI advisor
+            to get personalized suggestions!</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

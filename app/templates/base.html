@@ -1,0 +1,76 @@
+<!--
+templates/base.html — Master Layout Template
+==============================================
+Why this file exists:
+    Every page extends this template via extends "base.html".
+    It provides the HTML skeleton, navigation bar, flash messages,
+    CSS/JS includes, and block placeholders that child templates fill.
+    DRY: change the nav once here, it updates everywhere.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI Career Connect — Intelligent career guidance powered by AI">
+    <title>{% block title %}AI Career Connect{% endblock %}</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Chart.js (for dashboard) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+
+    <!-- App CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- ── Navigation ─────────────────────────────────── -->
+    <nav class="navbar" id="main-navbar">
+        <div class="nav-brand">
+            <a href="{{ url_for('dashboard.index') }}">🚀 AI Career Connect</a>
+        </div>
+        <div class="nav-links">
+            {% if current_user.is_authenticated %}
+                <a href="{{ url_for('dashboard.index') }}" id="nav-dashboard">Dashboard</a>
+                <a href="{{ url_for('career.recommendations') }}" id="nav-careers">Careers</a>
+                <span class="nav-user">👤 {{ current_user.username }}</span>
+                <a href="{{ url_for('auth.logout') }}" class="btn btn-outline" id="nav-logout">Logout</a>
+            {% else %}
+                <a href="{{ url_for('auth.login') }}" id="nav-login">Login</a>
+                <a href="{{ url_for('auth.register') }}" class="btn btn-primary" id="nav-register">Register</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <!-- ── Flash Messages ─────────────────────────────── -->
+    <div class="flash-container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash flash-{{ category }}" id="flash-message">
+                        {{ message }}
+                        <button class="flash-close" onclick="this.parentElement.remove()">×</button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <!-- ── Main Content ───────────────────────────────── -->
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- ── Footer ─────────────────────────────────────── -->
+    <footer class="footer">
+        <p>&copy; 2026 AI Career Connect. Powered by Mistral AI.</p>
+    </footer>
+
+    <!-- App JS -->
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

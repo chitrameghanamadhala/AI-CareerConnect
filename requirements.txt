@@ -1,0 +1,30 @@
+# ── Flask Core ──────────────────────────────────────────
+Flask==3.1.1
+Flask-SQLAlchemy==3.1.1
+Flask-Migrate==4.1.0
+Flask-Login==0.6.3
+Flask-WTF==1.2.2
+Flask-CORS==5.0.1
+
+# ── Database ────────────────────────────────────────────
+# SQLite is built-in; no extra driver needed.
+
+# ── Mistral AI Integration ──────────────────────────────
+mistralai==1.6.0
+httpx==0.28.1
+
+# ── Speech-to-Text ─────────────────────────────────────
+SpeechRecognition==3.14.1
+PyAudio==0.2.14
+
+# ── Text-to-Speech ─────────────────────────────────────
+gTTS==2.5.4
+
+# ── Utilities ───────────────────────────────────────────
+python-dotenv==1.1.0
+Werkzeug==3.1.3
+email-validator==2.2.0
+
+# ── Testing ─────────────────────────────────────────────
+pytest==8.3.5
+pytest-flask==1.3.0

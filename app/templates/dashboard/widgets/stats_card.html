@@ -1,0 +1,31 @@
+<!--
+templates/dashboard/widgets/stats_card.html — Stat Cards
+==========================================================
+Why this file exists:
+    Reusable widget fragment included via include directive on the dashboard.
+    Displays summary statistics in card format. Kept separate so it can
+    be re-used on other pages or replaced without touching the main template.
+-->
+<div class="stat-card" id="stat-conversations">
+    <div class="stat-icon">💬</div>
+    <div class="stat-info">
+        <span class="stat-value">{{ total_conversations }}</span>
+        <span class="stat-label">Conversations</span>
+    </div>
+</div>
+
+<div class="stat-card" id="stat-messages">
+    <div class="stat-icon">📝</div>
+    <div class="stat-info">
+        <span class="stat-value">{{ total_messages }}</span>
+        <span class="stat-label">Messages</span>
+    </div>
+</div>
+
+<div class="stat-card" id="stat-careers">
+    <div class="stat-icon">🎯</div>
+    <div class="stat-info">
+        <span class="stat-value">{{ total_careers }}</span>
+        <span class="stat-label">Career Paths</span>
+    </div>
+</div>
