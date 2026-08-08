@@ -15,7 +15,9 @@ httpx==0.28.1
 
 # ── Speech-to-Text ─────────────────────────────────────
 SpeechRecognition==3.14.1
-PyAudio==0.2.14
+# PyAudio is removed because it requires system-level PortAudio C libraries (portaudio.h)
+# which are missing in cloud environments like Render. PyAudio is only needed for local
+# microphone input (sr.Microphone()), not for transcribing uploaded files (sr.AudioFile()).
 
 # ── Text-to-Speech ─────────────────────────────────────
 gTTS==2.5.4
